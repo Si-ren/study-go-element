@@ -35,4 +35,6 @@ func main() {
 	//byte转字符串
 	tempStr := string([]byte{97, 98, 99})
 	fmt.Println(tempStr)
+
+	//字符串数字转换二进制
 }
