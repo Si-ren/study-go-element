@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func bubbleSort(point *[5]int) *[5]int {
+func BubbleSort(point *[5]int) *[5]int {
 	length := len(*point) - 1
 	for i := 0; i < length; i++ {
 		for j := 0; j < length-i; j++ {
@@ -19,6 +19,6 @@ func bubbleSort(point *[5]int) *[5]int {
 
 func main() {
 	var array [5]int = [5]int{3, 2, 4, 5, 1}
-	bubbleSort(&array)
+	BubbleSort(&array)
 	fmt.Println(array)
 }
