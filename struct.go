@@ -44,7 +44,7 @@ func main() {
 	user01.Name = "user02"
 	fmt.Println(user01)
 
-	//struct使用方式二
+	//struct使用方式二,返回的是指针类型!!!
 	var user02 *User = new(User)
 	//因为user02是一个指针,因此可以使用标准的字段赋值方式
 	//不过go做了简化, (*user02).name = "user02" 也可以写成 user02.name="user02"
@@ -54,7 +54,7 @@ func main() {
 	(*user02).Alive = true
 	fmt.Println(*user02)
 
-	//struct使用方式三
+	//struct使用方式三,返回的是指针类型!!!
 	var user03 *User = &User{"user03", 15, false}
 	//(*user03).Name = "user03"
 	//(*user03).Age = 15
