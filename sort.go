@@ -16,22 +16,22 @@ func BubbleSort(point *[5]int) {
 
 }
 
-func QuickSort(arr *[10]int) {
-	_quickSort(arr, 0, len(arr)-1)
+func QuickSort(arr *[5]int) {
+	_quickSort(arr, 0, len(*arr)-1)
 }
 
-func _quickSort(arr *[10]int, left, right int) {
+func _quickSort(arr *[5]int, left, right int) {
 	if left < right {
 		partitionIndex := partition(arr, left, right)
 		_quickSort(arr, left, partitionIndex-1)
 		_quickSort(arr, partitionIndex+1, right)
 	}
 }
-func swap(arr *[10]int, i, j int) {
+func swap(arr *[5]int, i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 
-func partition(arr *[10]int, left, right int) int {
+func partition(arr *[5]int, left, right int) int {
 	index := left + 1
 	for i := index; i <= right; i++ {
 		if arr[i] < arr[left] {
@@ -48,7 +48,7 @@ func main() {
 	BubbleSort(&array01)
 	fmt.Println(array01)
 
-	var array02 [10]int = [10]int{3, 2, 4, 5, 1, 0, 6, 9, 8, 7}
+	var array02 [5]int = [5]int{3, 2, 4, 5, 1}
 	QuickSort(&array02)
 	fmt.Println(array02)
 }
