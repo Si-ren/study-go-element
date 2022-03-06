@@ -25,6 +25,6 @@ func NewCustomer(id int, name string, gender string,
 
 // GetInfo 返回格式化字符串的用户信息
 func (this *Customer) GetInfo() string {
-	info := fmt.Sprintf("%v\t%v\t%v\t%v\t%v\t%v\t", this.Id, this.Name, this.Gender, this.Age, this.Phone, this.Email)
+	info := fmt.Sprintf("%v\t%v\t%v\t%v\t%v\t%v", this.Id, this.Name, this.Gender, this.Age, this.Phone, this.Email)
 	return info
 }

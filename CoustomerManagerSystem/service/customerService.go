@@ -22,6 +22,28 @@ func NewCustomerService() *CustomerService {
 
 }
 
+// List 列出列表
 func (c *CustomerService) List() []model.Customer {
 	return c.customers
+}
+
+func NewCustomer(name string, gender string,
+	age int, phone string, email string) model.Customer {
+	return model.Customer{
+		Name:   name,
+		Gender: gender,
+		Age:    age,
+		Phone:  phone,
+		Email:  email,
+	}
+}
+
+// Add 用户添加到customers
+//!!!一定要指针，因为CustomerService永远是第一次创建的
+func (c *CustomerService) Add(customer model.Customer) bool {
+	//id顺序规则，即添加顺序
+	c.customerNum++
+	customer.Id = c.customerNum
+	c.customers = append(c.customers, customer)
+	return true
 }
