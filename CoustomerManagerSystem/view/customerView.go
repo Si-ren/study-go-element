@@ -24,6 +24,45 @@ func (receiver *customerView) list() {
 	fmt.Println("---------客户列表完成---------")
 }
 
+func (receiver *customerView) exit() {
+	for {
+		fmt.Println("确认是否退出（Y/N）：")
+		fmt.Scanln(&receiver.key)
+		if receiver.key == "Y" || receiver.key == "y" || receiver.key == "N" || receiver.key == "n" {
+			break
+		}
+		fmt.Println("你的输入有误，请重新输入")
+	}
+	if receiver.key == "Y" || receiver.key == "y" {
+		receiver.loop = false
+	}
+}
+
+func (receiver *customerView) delete() {
+	for {
+		fmt.Println("----------删除客户----------")
+		fmt.Println("请选择待删除客户编号（-1退出）：")
+		index := -1
+		fmt.Scanln(&index)
+		if index == -1 {
+			//如果是-1，那就放弃操作
+			return
+		}
+		//调用customerService的Delete方法
+
+		fmt.Println("确认是否删除（Y/N）：")
+		choice := ""
+		fmt.Scanln(&choice)
+		if choice == "Y" || choice == "y" {
+			if receiver.customerService.Delete(index) {
+				fmt.Println("删除成功")
+			} else {
+				fmt.Println("删除失败")
+			}
+		}
+	}
+}
+
 func (receiver *customerView) add() {
 	fmt.Println("----------添加客户----------")
 	fmt.Println("姓名：")
@@ -65,13 +104,12 @@ func (receiver *customerView) mainMenu() {
 		case "2":
 			fmt.Println("修改客户")
 		case "3":
-			fmt.Println("删除客户")
+			receiver.delete()
 		case "4":
 			//list函数是此对象的函数，所以要用this，不能使用结构体名
 			receiver.list()
 		case "5":
-			fmt.Println("退出")
-			receiver.loop = false
+			receiver.exit()
 		default:
 			fmt.Println("输入有误，请重新输入...")
 		}

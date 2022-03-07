@@ -27,6 +27,29 @@ func (c *CustomerService) List() []model.Customer {
 	return c.customers
 }
 
+func (c *CustomerService) Delete(id int) bool {
+	index := c.FindById(id)
+	//如果index为-1，说明没有这用户
+	if index == -1 {
+		return false
+	}
+	//从切片删除一个元素,即元素的左边加上元素的右边，跳过这个元素
+	c.customers = append(c.customers[:index], c.customers[index+1:]...)
+	return true
+}
+
+// FindById 根据id查找客户在切片中的位置
+func (c *CustomerService) FindById(id int) int {
+	index := -1
+	for i := 0; i < len(c.customers); i++ {
+		if c.customers[i].Id == id {
+			index = i
+		}
+	}
+
+	return index
+}
+
 func NewCustomer(name string, gender string,
 	age int, phone string, email string) model.Customer {
 	return model.Customer{
