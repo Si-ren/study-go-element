@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/goinaction/code/chapter7/patterns/work"
+	//_ "github.com/goinaction/code/chapter7/patterns/work"
 	"log"
 	"time"
 )
@@ -16,5 +16,5 @@ func (m *namePrinter) Task() {
 }
 
 func main() {
-	p := work.New(2)
+	//p := work.New(2)
 }
