@@ -5,6 +5,7 @@ import "fmt"
 type Stu struct {
 }
 
+// TypeJudge 断言的最佳实践
 func TypeJudge(items ...interface{}) {
 	for index, x := range items {
 		switch x.(type) {
