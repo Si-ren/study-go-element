@@ -12,12 +12,10 @@ import (
 type Transfer struct {
 	//分析它应该有哪些字段
 	Conn net.Conn
-	Buf  [8096]byte //这时传输时，使用缓冲
+	Buf  [8096]byte //这是传输时，使用缓冲
 }
 
 func (this *Transfer) ReadPkg() (mes message.Message, err error) {
-
-	//buf := make([]byte, 8096)
 	fmt.Println("读取客户端发送的数据...")
 	//conn.Read 在conn没有被关闭的情况下，才会阻塞
 	//如果客户端关闭了 conn 则，就不会阻塞

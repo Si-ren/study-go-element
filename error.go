@@ -34,5 +34,5 @@ func main() {
 	err := tryError("file")
 	//中断程序并打印错误
 	panic(err)
-
+	//fmt.Println(err)
 }
