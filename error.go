@@ -1,8 +1,9 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+	"github.com/pkg/errors"
+	"os"
 )
 
 func testError() {
@@ -28,11 +29,53 @@ func tryError(str string) (err error) {
 	}
 }
 
-func main() {
-	testError()
+func func1() error {
+	return errors.New("this is func1 error")
+}
 
-	err := tryError("file")
+// errors.Wrap 和 WithMessage可以传递error的上下文
+func func2() error {
+	err := func1()
+	//return errors.Wrap(err,"this is func2 error")
+	return errors.WithMessage(err, "this is func3 error")
+
+}
+
+func func3() error {
+	err := func2()
+	//return errors.Wrap(err,"this is func3 error")
+	return errors.WithMessage(err, "this is func3 error")
+}
+
+// 协程处理发生error 不中断main函数
+func Go(x func()) {
+	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				fmt.Println(err)
+			}
+		}()
+		x()
+	}()
+}
+
+func main() {
+	//testError()
+	//err := tryError("file")
 	//中断程序并打印错误
+
+	Go(func() {
+		fmt.Println("This is go routine")
+		panic("go routine err")
+	})
+
+	err := func3()
+	if err != nil {
+		fmt.Printf("original error: %T %v\n", errors.Cause(err), errors.Cause(err))
+		fmt.Printf("stack trace: \n%+v\n", err)
+		os.Exit(1)
+	}
+
 	panic(err)
 	//fmt.Println(err)
 }
