@@ -1,0 +1,11 @@
+syntax = "proto3";
+package models;
+option go_package="protobuf/gen/go;protobuf";
+
+message Student {
+  string  name=1;
+  int64  sex=2;
+  int64  height=3;
+//  切片
+//  repeated int64 score=4;
+}
