@@ -12,7 +12,7 @@ import (
 	"context"
 	"io"
 	"net/http"
-	extProtobuf "protobuf/gen/go"
+	
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
@@ -32,8 +32,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_GetStudentInfo_GetStudentInfo_0(ctx context.Context, marshaler runtime.Marshaler, client extProtobuf.GetStudentInfoClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq extProtobuf.FindStudent
+func request_GetStudentInfo_GetStudentInfo_0(ctx context.Context, marshaler runtime.Marshaler, client GetStudentInfoClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq FindStudent
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -58,8 +58,8 @@ func request_GetStudentInfo_GetStudentInfo_0(ctx context.Context, marshaler runt
 
 }
 
-func local_request_GetStudentInfo_GetStudentInfo_0(ctx context.Context, marshaler runtime.Marshaler, server extProtobuf.GetStudentInfoServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq extProtobuf.FindStudent
+func local_request_GetStudentInfo_GetStudentInfo_0(ctx context.Context, marshaler runtime.Marshaler, server GetStudentInfoServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq FindStudent
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -88,7 +88,7 @@ func local_request_GetStudentInfo_GetStudentInfo_0(ctx context.Context, marshale
 // UnaryRPC     :call GetStudentInfoServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterGetStudentInfoHandlerFromEndpoint instead.
-func RegisterGetStudentInfoHandlerServer(ctx context.Context, mux *runtime.ServeMux, server extProtobuf.GetStudentInfoServer) error {
+func RegisterGetStudentInfoHandlerServer(ctx context.Context, mux *runtime.ServeMux, server GetStudentInfoServer) error {
 
 	mux.Handle("GET", pattern_GetStudentInfo_GetStudentInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -146,7 +146,7 @@ func RegisterGetStudentInfoHandlerFromEndpoint(ctx context.Context, mux *runtime
 // RegisterGetStudentInfoHandler registers the http handlers for service GetStudentInfo to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
 func RegisterGetStudentInfoHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterGetStudentInfoHandlerClient(ctx, mux, extProtobuf.NewGetStudentInfoClient(conn))
+	return RegisterGetStudentInfoHandlerClient(ctx, mux, NewGetStudentInfoClient(conn))
 }
 
 // RegisterGetStudentInfoHandlerClient registers the http handlers for service GetStudentInfo
@@ -154,7 +154,7 @@ func RegisterGetStudentInfoHandler(ctx context.Context, mux *runtime.ServeMux, c
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "extProtobuf.GetStudentInfoClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "extProtobuf.GetStudentInfoClient" to call the correct interceptors.
-func RegisterGetStudentInfoHandlerClient(ctx context.Context, mux *runtime.ServeMux, client extProtobuf.GetStudentInfoClient) error {
+func RegisterGetStudentInfoHandlerClient(ctx context.Context, mux *runtime.ServeMux, client GetStudentInfoClient) error {
 
 	mux.Handle("GET", pattern_GetStudentInfo_GetStudentInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
