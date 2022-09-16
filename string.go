@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var str string = "hello,世界"
-
+	// var characters byte
 	//遍历string
 	r := []rune(str)
 	fmt.Println(str)

@@ -1,11 +1,23 @@
 syntax = "proto3";
+// package是rpc gateway使用的
 package models;
+// go_package是go的package
 option go_package="protobuf/gen/go;protobuf";
 
+// protoc -I . --go_out ./gen/go  --go_opt paths=source_relative ./student.proto
 message Student {
   string  name=1;
   int64  sex=2;
   int64  height=3;
 //  切片
 //  repeated int64 score=4;
+}
+
+message FindStudent {
+  string name=1;
+}
+
+// protoc -I . --go-grpc_out=require_unimplemented_servers=false:./gen/go  --go-grpc_opt  paths=source_relative ./student.proto
+service GetStudentInfo{
+  rpc GetStudentInfo(FindStudent)returns(Student){}
 }
