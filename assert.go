@@ -1,8 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Stu struct {
+	age   int
+	score int
 }
 
 // TypeJudge 断言的最佳实践
@@ -20,9 +24,9 @@ func TypeJudge(items ...interface{}) {
 		case string:
 			fmt.Printf("第%v个参数类型是 string ,值为 %v\n", index, x)
 		case Stu:
-			fmt.Printf("第%v个参数类型是 Stu ,值为 %v\n", index, x)
+			fmt.Printf("第%v个参数类型是 Stu ,值为 %v  %v\n", index, x.(Stu).age, x.(Stu).score)
 		case *Stu:
-			fmt.Printf("第%v个参数类型是 *Stu ,值为 %v\n", index, x)
+			fmt.Printf("第%v个参数类型是 *Stu ,值为 %v  %v\n", index, x.(*Stu).age, x.(*Stu).score)
 		default:
 			fmt.Printf("第%v个参数类型 不确定 ,值为 %v\n", index, x)
 		}
@@ -43,8 +47,8 @@ func main() {
 	var n2 float32 = 2.2
 	var n3 string = "33"
 	var n4 bool = true
-	var n5 Stu = Stu{}
-	var n6 *Stu = &Stu{}
+	var n5 Stu = Stu{1, 1}
+	var n6 *Stu = &Stu{2, 2}
 	TypeJudge(n1, n2, n3, n4, n5, n6)
 
 }

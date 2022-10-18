@@ -6,12 +6,27 @@ import (
 	"sync"
 )
 
-//这边有个疑问？为啥这个要全局变量
+// 这边有个疑问？为啥这个要全局变量
+// ***map不支持并发修改***如果要使用map并发修改，那么就需要使用sync.map
+
+//使用for select时，单独的break不能退出for循环，得使用break LOOP:的方式退出
+//LOOP:
+//	for{
+//		select{
+//		case <- ch1:
+//			break LOOP
+//		case <- ch2:
+//			break LOOP
+//		case default:
+//			break LOOP
+//		}
+//	}
+
 var (
 	wg sync.WaitGroup
 )
 
-//intChan存放要计算的数
+// intChan存放要计算的数
 func putNum(intChan chan int) {
 	defer wg.Done()
 	for i := 0; i < 800; i++ {
@@ -20,7 +35,7 @@ func putNum(intChan chan int) {
 	close(intChan)
 }
 
-//计算素数并把素数放入primeChan管道中
+// 计算素数并把素数放入primeChan管道中
 func primeNum(intChan chan int, primeChan chan int, exitChan chan bool) {
 	defer wg.Done()
 	fmt.Println("开始数据筛选")
