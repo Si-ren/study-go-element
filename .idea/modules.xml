@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../designMode-Algorithm/.idea/designMode-Algorithm.iml" filepath="$PROJECT_DIR$/../designMode-Algorithm/.idea/designMode-Algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../go-tools/.idea/go-tools.iml" filepath="$PROJECT_DIR$/../go-tools/.idea/go-tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mytest.iml" filepath="$PROJECT_DIR$/.idea/mytest.iml" />
       <module fileurl="file://$PROJECT_DIR$/../webapp/.idea/webapp.iml" filepath="$PROJECT_DIR$/../webapp/.idea/webapp.iml" />
     </modules>
