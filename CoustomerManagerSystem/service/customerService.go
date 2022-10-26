@@ -5,7 +5,7 @@ import (
 )
 
 // CustomerService 该CustomerService ,完成对Customer的操作
-//增删改查
+// 增删改查
 type CustomerService struct {
 	customers []model.Customer
 	//声明一个字段，表示当前切片有多少客户
@@ -62,7 +62,7 @@ func NewCustomer(name string, gender string,
 }
 
 // Add 用户添加到customers
-//!!!一定要指针，因为CustomerService永远是第一次创建的
+// !!!一定要指针，因为CustomerService永远是第一次创建的
 func (c *CustomerService) Add(customer model.Customer) bool {
 	//id顺序规则，即添加顺序
 	c.customerNum++

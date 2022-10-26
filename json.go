@@ -11,7 +11,7 @@ type Monster struct {
 	Sal  float64
 }
 
-//将结构体序列化
+// 将结构体序列化
 func testStruct() {
 	monster := Monster{Name: "Siri", Age: 18, Sal: 2000.00}
 
@@ -23,7 +23,7 @@ func testStruct() {
 	fmt.Println("monster序列化结果：", string(data))
 }
 
-//将map序列化
+// 将map序列化
 func testMap() {
 	var a map[string]interface{}
 
@@ -40,7 +40,7 @@ func testMap() {
 	fmt.Println("monster序列化结果：", string(data))
 }
 
-//json反序列化
+// json反序列化
 func unmarshalStruct() {
 	str := "{\"Name\":\"Siri\",\"Age\":18,\"Sal\":2000}"
 	var monster Monster

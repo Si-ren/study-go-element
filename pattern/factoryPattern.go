@@ -18,7 +18,7 @@ func NewFactory(str string, age int, use bool) *factory {
 }
 
 // GetUse
-//如果只需要获取factory中的use变量,那么需要使用一个方法返回才能外部获取
+// 如果只需要获取factory中的use变量,那么需要使用一个方法返回才能外部获取
 func (f *factory) GetUse() bool {
 	return f.use
 }

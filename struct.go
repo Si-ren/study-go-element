@@ -24,19 +24,19 @@ type User struct {
 //对于函数,func test(p *point){} ,不能传值类型:test(p),得这样用test(&p)
 
 // PrintAge struct中的方法
-//这里传值是值传递,如果是要引用传递,那么struct中要写成指针: func (user *User) PrintAge(){}
-//在使用方法时,p.method和(&p).method都能使用,主要看定义方法时,使用的struct是值还是引用.
+// 这里传值是值传递,如果是要引用传递,那么struct中要写成指针: func (user *User) PrintAge(){}
+// 在使用方法时,p.method和(&p).method都能使用,主要看定义方法时,使用的struct是值还是引用.
 func (user User) PrintAge() {
 	fmt.Println(user.Name, "的年龄为: ", user.Age)
 }
 
-//struct自定义String，这样使用 fmt.Println(&user04) 的输出为  Name: user04  Age: 20  Alive: true
+// struct自定义String，这样使用 fmt.Println(&user04) 的输出为  Name: user04  Age: 20  Alive: true
 func (user *User) String() string {
 	var str string = fmt.Sprintf("Name: %v  Age: %v  Alive: %v", user.Name, user.Age, user.Alive)
 	return str
 }
 
-//main
+// main
 func main() {
 
 	//struct使用方式一,直接声明使用
