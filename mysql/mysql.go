@@ -14,7 +14,7 @@ const (
 		name,description,status,update_at,sync_at,sync_accout,public_ip,
 		private_ip,pay_type,describe_hash,resource_hash
 	) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`
-	insertHostSQL = `INSERT INTO host (
+	insertHostSQL = `INSERT INTO user (
 		resource_id,cpu,memory,gpu_amount,gpu_spec,os_type,os_name,
 		serial_number,image_id,internet_max_bandwidth_out,
 		internet_max_bandwidth_in,key_pair_name,security_groups
@@ -24,14 +24,14 @@ const (
 		status=?,update_at=?,sync_at=?,sync_accout=?,
 		public_ip=?,private_ip=?,pay_type=?,describe_hash=?,resource_hash=?
 	WHERE id = ?`
-	updateHostSQL = `UPDATE host SET 
+	updateHostSQL = `UPDATE user SET 
 		cpu=?,memory=?,gpu_amount=?,gpu_spec=?,os_type=?,os_name=?,
 		image_id=?,internet_max_bandwidth_out=?,
 		internet_max_bandwidth_in=?,key_pair_name=?,security_groups=?
 	WHERE resource_id = ?`
 
-	queryHostSQL      = `SELECT * FROM host `
-	deleteHostSQL     = `DELETE FROM host WHERE resource_id = ?;`
+	queryHostSQL      = `SELECT * FROM user `
+	deleteHostSQL     = `DELETE FROM user WHERE resource_id = ?;`
 	deleteResourceSQL = `DELETE FROM resource WHERE id = ?;`
 )
 

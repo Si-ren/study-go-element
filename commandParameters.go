@@ -31,6 +31,6 @@ func main() {
 	//输出
 	fmt.Println("user: ", user)
 	fmt.Println("password: ", password)
-	fmt.Println("host: ", host)
+	fmt.Println("user: ", host)
 
 }
