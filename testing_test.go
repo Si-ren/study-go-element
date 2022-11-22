@@ -21,7 +21,7 @@ import (
 
 //测试单个方法 go test -v -test.run TestAddUpper
 
-//要给测试用例，去测试addUpper是否正确
+// 要给测试用例，去测试addUpper是否正确
 func TestAddUpper(t *testing.T) {
 	res := AddUpper(10)
 	if res != 45 {

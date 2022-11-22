@@ -26,7 +26,6 @@ func main() {
 	s := grpc.NewServer()
 	protobuf.RegisterGetStudentInfoServer(s, &Service{})
 	log.Fatal(s.Serve(lis))
-
 }
 
 func startGRPCGateway() {

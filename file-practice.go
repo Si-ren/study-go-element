@@ -14,7 +14,7 @@ type CharCount struct {
 	OtherCount int
 }
 
-//统计一个文本中各个字符数量
+// 统计一个文本中各个字符数量
 func main() {
 	fileName := "e:\\go-file.txt"
 	file, err := os.Open(fileName)

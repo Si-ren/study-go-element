@@ -12,7 +12,7 @@ type Monster struct {
 	Sex   string
 }
 
-//方法，显示s的值
+// 方法，显示s的值
 func (s Monster) Print() {
 	fmt.Println("---start----")
 	fmt.Println(s)

@@ -8,7 +8,7 @@ import (
 	"net"
 )
 
-//这里将这些方法关联到结构体中
+// 这里将这些方法关联到结构体中
 type Transfer struct {
 	//分析它应该有哪些字段
 	Conn net.Conn
@@ -21,7 +21,7 @@ func (this *Transfer) ReadPkg() (mes message.Message, err error) {
 	//如果客户端关闭了 conn 则，就不会阻塞
 	_, err = this.Conn.Read(this.Buf[:4])
 	if err != nil {
-		//err = errors.New("read pkg header error")
+		//err = errors.New("read services header error")
 		return
 	}
 	//根据buf[:4] 转成一个 uint32类型
@@ -30,7 +30,7 @@ func (this *Transfer) ReadPkg() (mes message.Message, err error) {
 	//根据 pkgLen 读取消息内容
 	n, err := this.Conn.Read(this.Buf[:pkgLen])
 	if n != int(pkgLen) || err != nil {
-		//err = errors.New("read pkg body error")
+		//err = errors.New("read services body error")
 		return
 	}
 	//把pkgLen 反序列化成 -> message.Message
