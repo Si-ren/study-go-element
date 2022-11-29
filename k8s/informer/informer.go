@@ -22,11 +22,11 @@ func main() {
 	}
 	clientSet, err := kubernetes.NewForConfig(conf)
 	informerFactory := informers.NewSharedInformerFactory(clientSet, 30*time.Second)
-	deployInformer := informerFactory.Apps().V1().Deployments()
-	informer := deployInformer.Informer()
-	deployListener := deployInformer.Lister()
+	deploy := informerFactory.Apps().V1().Deployments()
+	deployInformer := deploy.Informer()
+	deployListener := deploy.Lister()
 	// 资源事件
-	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
+	deployInformer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc:    onAdd,
 		UpdateFunc: onUpdate,
 		DeleteFunc: onDelete,

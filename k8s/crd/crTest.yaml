@@ -1,0 +1,10 @@
+apiVersion: "siri-test.my.domain/v1"
+kind: TestService
+metadata:
+  name: test11
+spec:
+  cronSpec: "* * * * */5"
+  replicas: 5
+  name: "CR_testService"
+  foo: "tball"
+  method: "add"
