@@ -12,13 +12,23 @@ spec:
     kind: AppService
     listKind: AppServiceList
     plural: appservices
+    shortNames:
+    - as
     singular: appservice
   scope: Namespaced
   versions:
-  - name: v1
+  - additionalPrinterColumns:
+    - description: AppService image
+      jsonPath: .spec.image
+      name: image
+      type: string
+    - description: app status
+      jsonPath: .status.conditions[?(@.type == 'DeploymentError')].status
+      name: statuss
+      type: string
+    name: v1
     schema:
       openAPIV3Schema:
-        description: AppService is the Schema for the appservices API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -35,13 +45,96 @@ spec:
           spec:
             description: AppServiceSpec defines the desired state of AppService
             properties:
-              foo:
+              image:
                 description: Foo is an example field of AppService. Edit appservice_types.go
-                  to remove/update
+                  to remove/update Foo string `json:"foo,omitempty"` Image runtime
+                  image to use.
                 type: string
+              imagePullPolicy:
+                description: ImagePullPolicy overrides AppServiceRuntime spec.imagePullPolicy
+                enum:
+                - Always
+                - IfNotPresent
+                - Never
+                - Optional
+                type: string
+              ingress:
+                description: Ingress Default port is
+                type: boolean
+              routes:
+                description: Routes for which the ingress is created The first item
+                  is set the WP_HOME and WP_SITEURL constants. If no routes are specified,
+                  ingress syncing is disabled and WP_HOME de defaults to NAME.NAMESPACE.svc.
+                items:
+                  properties:
+                    domain:
+                      description: Domain for the route
+                      minLength: 1
+                      type: string
+                    path:
+                      description: The path for the route. Defaults to /.
+                      type: string
+                  required:
+                  - domain
+                  type: object
+                type: array
+              service:
+                description: Service if Pod type is Cronjob,this is unnecessary, default
+                  service port is 80,target port is 80
+                properties:
+                  sourcePort:
+                    type: integer
+                  targetPort:
+                    type: integer
+                required:
+                - sourcePort
+                - targetPort
+                type: object
+            required:
+            - image
+            - ingress
+            - service
             type: object
           status:
             description: AppServiceStatus defines the observed state of AppService
+            properties:
+              conditions:
+                description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                  of cluster Important: Run "make" to regenerate code after modifying
+                  this file Conditions represents the AppService resource conditions
+                  list.'
+                items:
+                  properties:
+                    lastTransitionTime:
+                      description: Last time the condition transitioned from one status
+                        to another.
+                      format: date-time
+                      type: string
+                    lastUpdateTime:
+                      description: The last time this condition was updated.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A human readable message indicating details about
+                        the transition.
+                      type: string
+                    reason:
+                      description: The reason for the condition's last transition.
+                      type: string
+                    status:
+                      description: Status of the condition, one of True, False, Unknown.
+                      type: string
+                    type:
+                      description: Type of AppService condition.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
             type: object
         type: object
     served: true

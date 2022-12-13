@@ -18,6 +18,12 @@ package controllers
 
 import (
 	"context"
+	appsv1 "k8s.io/api/apps/v1"
+	corev1 "k8s.io/api/core/v1"
+	networkingv1 "k8s.io/api/networking/v1"
+	"k8s.io/apimachinery/pkg/api/errors"
+	"kubebuilderDemo/controllers/utils"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -47,10 +53,38 @@ type AppServiceReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.13.0/pkg/reconcile
 func (r *AppServiceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
-
+	l := log.FromContext(ctx)
 	// TODO(user): your logic here
+	l.Info("Start Reconcile")
+	appSvc := &siritestv1.AppService{}
+	// 读取appService
+	if err := r.Get(ctx, req.NamespacedName, appSvc); err != nil {
+		l.Error(err, ": Get App error.")
+		return ctrl.Result{}, ignoreNotFound(err)
+	}
 
+	//根据appSvc配置进行处理
+	//1.Deployment
+	deployment := utils.NewDeployment(appSvc)
+	if err := controllerutil.SetControllerReference(appSvc, deployment, r.Scheme); err != nil {
+		return ctrl.Result{}, err
+	}
+	//查找deployment,如果没有,那么创建
+	d := &appsv1.Deployment{}
+	if err := r.Get(ctx, req.NamespacedName, d); err != nil {
+		if errors.IsNotFound(err) {
+			if err := r.Create(ctx, deployment); err != nil {
+				l.Error(err, "create deployment error")
+				return ctrl.Result{}, err
+			}
+		}
+	} else {
+		if err := r.Update(ctx, deployment); err != nil {
+			return ctrl.Result{}, err
+		}
+	}
+
+	//需要
 	return ctrl.Result{}, nil
 }
 
@@ -58,5 +92,16 @@ func (r *AppServiceReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 func (r *AppServiceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&siritestv1.AppService{}).
+		Owns(&appsv1.Deployment{}).
+		Owns(&networkingv1.Ingress{}).
+		Owns(&corev1.Service{}).
 		Complete(r)
+}
+
+func ignoreNotFound(err error) error {
+	if errors.IsNotFound(err) {
+		return nil
+	}
+
+	return err
 }

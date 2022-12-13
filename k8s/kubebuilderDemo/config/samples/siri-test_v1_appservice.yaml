@@ -10,3 +10,11 @@ metadata:
   name: appservice-sample
 spec:
   # TODO(user): Add fields here
+  routes:
+  - domain: "siritest"
+    path: "/"
+  image: "docker.io/sirius/demo"
+  service:
+    sourcePort: 80
+    targetPort: 80
+  ingress: true
