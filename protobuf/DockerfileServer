@@ -1,0 +1,14 @@
+FROM golang:1.19.5 AS go-build
+WORKDIR /go
+COPY . /go/protobuf
+RUN export CGO_ENABLED=0 && \
+    export GOHOSTOS="linux" && \
+    cd protobuf/rpcServiceClient && \
+    go build -o grpcServer ./server.go
+
+FROM debian:stable AS grpcServer
+WORKDIR /usr/local/
+COPY  --from=go-build /go/protobuf/rpcServiceClient/grpcServer  /usr/local/bin/
+#从一个容器中的目录拷贝到另一容器中
+EXPOSE 8081
+ENTRYPOINT ["/usr/local/bin/grpcServer"]
