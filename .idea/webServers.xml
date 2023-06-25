@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d26c988f-6382-46e1-a9c6-8ea0e0155f74" name="windows-ubuntu">
+        <fileTransfer rootFolder="/home/wxr/code" accessType="SFTP" host="172.26.199.77" port="22" sshConfigId="9460d1bd-9a0e-42d1-af34-be103d7ae3fa" sshConfig="wxr@172.26.199.77:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

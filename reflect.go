@@ -5,6 +5,11 @@ import (
 	"reflect"
 )
 
+//反射的缺点
+//1、过度使用会使代码难以阅读和维护
+//2、减缓程序的运行速度
+//3、无法在构建期被捕捉，并在运行期作为严重错误报告
+
 type Student struct {
 	name string
 	age  int

@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -76,12 +77,12 @@ func main() {
 	//copy文件
 	sourceFile := "e:\\go-file.txt"
 	var destFile string = "e:\\to-File.txt"
-	data, err := ioutil.ReadFile(sourceFile)
+	data, err := os.ReadFile(sourceFile)
 	if err != nil {
 		fmt.Println("open file err:", err)
 		return
 	}
-	err = ioutil.WriteFile(destFile, data, 0666)
+	err = os.WriteFile(destFile, data, 0666)
 	if err != nil {
 		fmt.Println("open file err:", err)
 		return
@@ -99,4 +100,77 @@ func PathExists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+// 写入文件的几种方法
+func openf1(f string) {
+	f1, err := os.Create(f)
+	if err != nil {
+		fmt.Println("Cannt create file: ", err)
+		return
+	}
+	defer f1.Close()
+	fmt.Fprintf(f1, string("test"))
+}
+
+func openf2(f string) {
+	f2, err := os.Create(f)
+	if err != nil {
+		fmt.Println("Cannt create file: ", err)
+		return
+	}
+	defer f2.Close()
+	n, err := f2.WriteString("test")
+	fmt.Printf("wrote %d bytes\n", n)
+}
+
+func openf3(f string) {
+	f3, err := os.Create(f)
+	if err != nil {
+		fmt.Println("Cannt create file: ", err)
+		return
+	}
+	defer f3.Close()
+	w := bufio.NewWriter(f3)
+	n, err := w.WriteString("test")
+	fmt.Printf("wrote %d bytes\n", n)
+	w.Flush()
+}
+
+func openf4(f string) {
+	s := []byte("Test Date")
+	err := os.WriteFile(f, s, 0644)
+	if err != nil {
+		fmt.Println("Cannt write to file: ", err)
+
+	}
+
+}
+
+func openf5(f string) {
+	s := []byte("Test Date")
+	f5, err := os.Create(f)
+	if err != nil {
+		fmt.Println("Cannt create file: ", err)
+		return
+	}
+	defer f5.Close()
+	n, err := io.WriteString(f5, string(s))
+	if err != nil {
+		fmt.Println("Cannt write date to file: ", err)
+		return
+	}
+	fmt.Printf("wrote %d bytes\n", n)
+}
+
+// strings.NewReader读入数据写入别处
+func stringsNewReader() {
+	s := strings.NewReader("Only Strings")
+	fmt.Println("r length: ", s.Len())
+	n, err := s.WriteTo(os.Stderr)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("Wrote %d bytes to os.Stderr\n", n)
 }
