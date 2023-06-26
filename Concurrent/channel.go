@@ -8,6 +8,9 @@ import "fmt"
 //管道一定要有读写,如果缺少读或者写,那么就会报错deadlock
 
 func main() {
+	// new和make有啥区别
+	// new 用于分配值类型的内存，并返回指向该类型零值的指针；而 make 用于分配引用类型的内存，并进行初始化，返回该类型的引用。
+
 	//创建一个存放1个int的管道
 	//如果要传入多个类型,那么就channel的类型就必须为interface{}
 	//interface类型的channel取出时要进行类型断言,否则取出的类型为interface不能使用

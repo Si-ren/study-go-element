@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="windows-ubuntu" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="windows-ubuntu">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/go-tools" local="$PROJECT_DIR$/../go-tools" web="/" />
+            <mapping deploy="/k8s" local="$PROJECT_DIR$/k8s" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
