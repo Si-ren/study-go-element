@@ -29,4 +29,3 @@ jobs:
       - run: |
           go mod tidy
           go build  -ldflags "-s -w" -o date-go  date.go 
-          
