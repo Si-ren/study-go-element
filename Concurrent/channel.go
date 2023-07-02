@@ -2,10 +2,12 @@ package main
 
 import "fmt"
 
-//channel本质试试一个数据结构-队列
+//channel本质是一个数据结构-队列
 //线程安全
 //channel是有类型的
 //管道一定要有读写,如果缺少读或者写,那么就会报错deadlock
+// struct{}信号通道有点是不可向其中发送数据，从而防止bug和错误的出现
+//如果从关闭的通道中读取数据，那么将会得到该通道类型的零值
 
 func main() {
 	// new和make有啥区别

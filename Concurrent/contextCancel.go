@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+// 该函数通过调用gen函数生成一个通道(chan int)来产生一系列整数值，并在打印每个值后检查是否达到5。如果达到5，则通过调用cancelFunc函数取消生成器函数(gen)的执行，并在1秒后打印"main done"。
+
 func main() {
 	ctx, cancelFunc := context.WithCancel(context.Background())
 	for v := range gen(ctx) {
