@@ -20,7 +20,21 @@ import (
 //ok      command-line-arguments  0.034s
 
 //测试单个方法 go test -v -test.run TestAddUpper
+// 还可以测试覆盖率  go test -cover  -v
+// 例： go test -cover .\testing.go .\testing_test.go -v
+/*
+=== RUN   TestAddUpper
+    testing_test.go:33: AddUpper(10)执行正常...
+--- PASS: TestAddUpper (0.00s)
+PASS
+coverage: 100.0% of statements
+ok      command-line-arguments  0.171s  coverage: 100.0% of statements
+*/
 
+// 还可以生成覆盖率配置文件
+// go test  .\testing.go .\testing_test.go -coverprofile="coverage.out" && go tool cover -func="coverage.out"
+
+// 如果测试时间过长，还可以加上-timeout参数,例： -timeout 15s
 // 要给测试用例，去测试addUpper是否正确
 func TestAddUpper(t *testing.T) {
 	res := AddUpper(10)
