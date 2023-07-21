@@ -11,8 +11,8 @@ import (
 	vault "github.com/hashicorp/vault/api"
 )
 
-// 2023-07-12 16:46:28 Unseal Key: TxKvVnt0nzU1vK2jursnMpVJmFqrYCZOxV/Kj+gqoHY=
-// 2023-07-12 16:46:28 Root Token: hvs.opZ5sGjbDXpTCswWlSGpTqXY
+// 2023-07-14 18:31:54 Unseal Key: h5ak247kTo/vXrtyudWTYZfPUYW54BNIF5iDWnQEztA=
+// 2023-07-14 18:31:54 Root Token: hvs.o7i7JXoXSpnHTpNHsmkQ3BGz
 
 // This is the accompanying code for the Developer Quick Start.
 // WARNING: Using root tokens is insecure and should never be done in production!
