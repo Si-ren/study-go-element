@@ -44,6 +44,7 @@ func main() {
 		return
 	}
 	// 创建协程池,ants.NewPoolWithFunc可以创建传参的func协程池
+	// 如果是只是协程池,用ants.NewPool(),然后用传入func(),用闭包的方式传入参数
 	p, err := ants.NewPoolWithFunc(5000, taskFunc)
 	if err != nil {
 		z.Error(err.Error())
