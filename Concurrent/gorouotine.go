@@ -34,7 +34,7 @@ func main() {
 	//设置使用的CPU
 	//1.8以下需要手动设置CPU核数
 	runtime.GOMAXPROCS(1)
-
+	runtime.Gosched()
 	var wg sync.WaitGroup
 	wg.Add(2)
 	fmt.Println("Start Goroutines")
