@@ -8,6 +8,8 @@ package main
 // 例如 单元测试要对数据库增删改查，但这个是不太好的。
 
 // db.go
+// 使用注释方式为单个接口生成mock
+//go:generate mockgen -source=db.go -destination=./mock_db_interface.go -package=main DB
 type DB interface {
 	Get(key string) (int, error)
 }
