@@ -16,5 +16,5 @@ type Cache interface {
 	// 清空所有key
 	Flush() bool
 	// 获取缓存中所有key的数量
-	Keys() int64
+	Keys() uint64
 }

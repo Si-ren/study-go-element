@@ -3,22 +3,26 @@ package main
 import (
 	"fmt"
 	"memCache/cache"
-	"memCache/cache_server"
+	"time"
 )
 
 func main() {
-	cache := cache.NewMemCache()
-	cache.SetMaxMemory("100MB")
-	cache.Set("int", 1)
-	cache.Set("bool", false)
-	cache.Set("data", map[string]interface{}{"a": 1})
-	cache.Get("int")
-	cache.Del("int")
-	cache.Flush()
-	cache.Keys()
+	cache0 := cache.NewMemCache()
+	cache0.SetMaxMemory("100MB")
+	cache0.Set("int", 1, 2*time.Second)
+	cache0.Set("bool", false, 2*time.Second)
+	cache0.Set("data", map[string]interface{}{"a": 1}, 2*time.Second)
+	cache0.Get("int")
+	cache0.Del("int")
+	cache0.Flush()
+	cache0.Keys()
+	fmt.Println(cache0.UsedMemorySize)
+	fmt.Println(cache0.Exists("data"))
+	fmt.Println(cache0.Get("data"))
 
-	cache1 := cache_server.NewMemCache()
-	cache1.SetMaxMemory("100MB")
-	cache1.Set("int", 2)
-	fmt.Println(cache1.Get("int"))
+	time.Sleep(3 * time.Second)
+	//cache1 := cache.NewMemCache()
+	//cache1.SetMaxMemory("100MB")
+	//cache1.Set("int", 2, 2*time.Second)
+	//fmt.Println(cache1.Get("int"))
 }

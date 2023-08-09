@@ -4,13 +4,13 @@ go 1.19
 
 require (
 	github.com/casbin/casbin/v2 v2.72.1
-	github.com/golang/mock v1.6.0
 	github.com/gomodule/redigo v1.8.8
 	github.com/hashicorp/vault/api v1.9.2
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/panjf2000/ants/v2 v2.8.1
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.16.0
+	github.com/robfig/cron/v3 v3.0.1
 	github.com/sirupsen/logrus v1.9.3
 	go.uber.org/mock v0.2.0
 	go.uber.org/zap v1.24.0
@@ -25,6 +25,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.0 // indirect
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
