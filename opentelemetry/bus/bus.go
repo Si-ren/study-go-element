@@ -2,10 +2,13 @@ package bus
 
 import (
 	"context"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/trace"
+	"errors"
 	"strconv"
 	"time"
+
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
 )
 
 func main() {
@@ -28,7 +31,7 @@ func NewBus(tracer trace.Tracer) Bus {
 }
 func (bus bus) Sum(ctx context.Context, a, b int) int {
 	c := a + b
-	ctx, span := bus.tracer.Start(ctx, "sum", trace.WithAttributes(attribute.String("c", strconv.Itoa(c))))
+	_, span := bus.tracer.Start(ctx, "sum", trace.WithAttributes(attribute.String("c", strconv.Itoa(c))))
 	defer span.End()
 	<-time.After(time.Second)
 	return c
@@ -36,7 +39,9 @@ func (bus bus) Sum(ctx context.Context, a, b int) int {
 
 func (bus bus) Product(ctx context.Context, a, b int) int {
 	c := a * b
-	ctx, span := bus.tracer.Start(ctx, "product", trace.WithAttributes(attribute.String("c", strconv.Itoa(c))))
+	_, span := bus.tracer.Start(ctx, "product", trace.WithAttributes(attribute.String("c", strconv.Itoa(c))))
+	span.SetStatus(codes.Error, "this is product error")
+	span.RecordError(errors.New("record error in product"))
 	defer span.End()
 	<-time.After(2 * time.Second)
 	return c
